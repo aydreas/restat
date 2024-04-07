@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2023"],
+        "target": "ES2022",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "strict": true,
+        "outDir": "dist",
+        "baseUrl": "./src",
+        "paths": {
+            "*": ["node_modules/*"]
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "name": "restat",
+    "version": "0.0.0",
+    "repository": "https://github.com/aydreas/restat.git",
+    "author": "aydreas <andreas.sch4@gmail.com>",
+    "license": "UNLICENSED",
+    "scripts": {
+        "build": "rm -rf ./dist && tsc --build",
+        "start": "tsc -w",
+        "crawler": "node ./dist/crawler/index.js",
+        "format": "prettier --check .",
+        "format:fix": "prettier --write .",
+        "lint": "eslint --max-warnings 0 .",
+        "lint:fix": "eslint --max-warnings 0 --fix ."
+    },
+    "type": "module",
+    "dependencies": {
+        "@commander-js/extra-typings": "^12.0.1",
+        "cheerio": "^1.0.0-rc.12",
+        "commander": "^12.0.0",
+        "kysely": "^0.27.3",
+        "p-queue": "^8.0.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.0.0",
+        "@types/node": "^20.12.5",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.2.5",
+        "typescript": "^5.4.4",
+        "typescript-eslint": "^7.5.0"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "packageManager": "yarn@4.1.1"
+}
