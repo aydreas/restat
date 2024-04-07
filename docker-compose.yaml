@@ -1,12 +1,19 @@
 services:
-  mariadb:
-    image: mariadb:11.3
-    environment:
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: testdb
-      MARIADB_USER: user
-      MARIADB_PASSWORD: password
-    ports:
-      - 3306:3306
-    volumes:
-      - ./data/mariadb:/var/lib/mysql
+    mariadb:
+        image: mariadb:11.3
+        environment:
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_DATABASE: testdb
+            MARIADB_USER: user
+            MARIADB_PASSWORD: password
+        ports:
+            - 3306:3306
+        volumes:
+            - ./data/mariadb:/var/lib/mysql
+
+    redis:
+        image: redis:7.2.4-alpine
+        ports:
+            - 6379:6379
+        volumes:
+            - ./data/redis:/data

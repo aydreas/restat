@@ -1,9 +1,8 @@
-import { NestFactory } from '@nestjs/core';
 import { CrawlerModule } from './crawler.module';
+import { CommandFactory } from 'nest-commander';
 
 async function bootstrap() {
-    const app = await NestFactory.create(CrawlerModule);
-    await app.listen(3000);
+    await CommandFactory.run(CrawlerModule);
 }
 bootstrap().catch((err) => {
     console.error(err);
