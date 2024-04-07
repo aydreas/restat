@@ -17,3 +17,13 @@ services:
             - 6379:6379
         volumes:
             - ./data/redis:/data
+
+    app:
+        image: node:20
+        working_dir: /app
+        volumes:
+            - ./api:/app
+        depends_on:
+            - mariadb
+            - redis
+        command: bash -c "corepack enable && exec yarn start"

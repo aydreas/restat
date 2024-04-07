@@ -1,6 +1,13 @@
-import { CommandRunner, RootCommand, Option, CliUtilityService } from 'nest-commander';
+import {
+    CommandRunner,
+    RootCommand,
+    Option,
+    CliUtilityService
+} from 'nest-commander';
 import { InvalidArgumentError } from 'commander';
-import { FetcherService } from '@app/fetcher';
+import { Logger } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 export interface GlobalOptions {
     throttle: number;
@@ -12,17 +19,21 @@ export interface GlobalOptions {
     description: 'Crawler for restat'
 })
 export class DefaultCommand extends CommandRunner {
-    constructor(private readonly utilityService: CliUtilityService, private readonly fetcherService: FetcherService) {
+    private readonly logger = new Logger(DefaultCommand.name);
+
+    constructor(
+        private readonly utilityService: CliUtilityService,
+        @InjectQueue('crawler_jobs') private readonly jobQueue: Queue
+    ) {
         super();
     }
 
-    run(): Promise<void> {
-        console.log(this.fetcherService);
-        return Promise.resolve();
-    }
+    async run(): Promise<void> {
+        await this.jobQueue.add({ url: 'https://www.google.com' });
 
-    get options() {
-        return this.command.opts<GlobalOptions>();
+        for (;;) {
+            await new Promise((resolve) => setTimeout(resolve, 60000));
+        }
     }
 
     @Option({
